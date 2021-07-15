@@ -1,24 +1,24 @@
 <template>
   <b-container class="mt-5 border px-0">
     <b-navbar toggleable class="border px-4" type="light" variant="light">
-      <b-navbar-brand>Lista de Contatos</b-navbar-brand>
+      <b-navbar-brand>Lista de inquilinos</b-navbar-brand>
       <b-button v-b-modal.modal-lg variant="info text-light"
         >Novo contato</b-button
       >
     </b-navbar>
     <b-modal id="modal-lg" size="lg" centered title="Novo cadastro" hide-footer>
-      <Form :person="null" :id="id" />
+      <Form :guest="null" :id="id" />
     </b-modal>
 
     <div class="px-3">
-      <b-row >
+      <b-row>
         <b-col cols="3" v-for="item in items" :key="item.cpf">
           <b-card-group deck class="mt-2 mb-3 flex">
             <b-card class="max-width card mr">
               <div @click="changePage(item)">
                 <b-col class="text-center">
                   <b-card-img
-                    src="https://cdn.iconscout.com/icon/free/png-256/contacts-43-459935.png"
+                    src="https://www.ird.lk/wp-content/uploads/2018/11/kisspng-crowd-drawing-cartoon-community-5abe5e8dc735f1.335904791522425485816.png"
                     alt="Image"
                     style="max-width: 100px"
                     class="rounded-0"
@@ -29,8 +29,11 @@
                     ><BIconFilePerson /> {{ item.name }}</b-list-group-item
                   >
                   <b-list-group-item
-                    ><BIconCardChecklist />
-                    {{ item.contact }}</b-list-group-item
+                    ><BIconCardChecklist /> {{ item.cpf }}</b-list-group-item
+                  >
+                  <b-list-group-item
+                    ><BIconCalendar4Week />
+                    {{ item.dataNasc }}</b-list-group-item
                   >
                 </b-list-group>
               </div>
@@ -39,21 +42,21 @@
                   <b-col cols="5">
                     <b-button
                       variant="warning dark text-light"
-                      @click="$bvModal.show('' + item.contact)"
+                      @click="$bvModal.show('' + item.cpf)"
                       >Editar</b-button
                     >
                     <b-modal
-                      :id="item.contact"
+                      :id="item.cpf"
                       size="lg"
                       centered
                       title="Editar"
                       hide-footer
                     >
-                      <Form :contact="item" :id="id" />
+                      <Form :guest="item" :id="id" />
                     </b-modal>
                   </b-col>
                   <b-col cols="5">
-                    <b-button variant="danger" @click="deletePerson(item.id)"
+                    <b-button variant="danger" @click="deletePerson(item.cpf)"
                       >Excluir</b-button
                     >
                   </b-col>
@@ -68,7 +71,7 @@
 </template>
 
 <script>
-import Form from "../components/contactForm.vue";
+import Form from "../components/guestForm.vue";
 import HTTP from "../req/api";
 
 import { BIconFilePerson, BIconCardChecklist } from "bootstrap-vue";
@@ -92,7 +95,7 @@ export default {
       this.$router.push({ path: "./contacts/:id" + item.cpf });
     },
     deletePerson(id) {
-      HTTP.delete("/contact/" + id)
+      HTTP.delete("/guest/" + id)
         .then((res) => {
           console.log(res);
           this.$router.go(this.$router.currentRoute);
@@ -106,7 +109,7 @@ export default {
     },
   },
   mounted() {
-    HTTP.get(`/contact/` + this.id)
+    HTTP.get(`/guest/` + this.id)
       .then((response) => {
         this.items = response.data;
       })

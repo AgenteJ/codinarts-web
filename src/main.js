@@ -12,13 +12,17 @@ Vue.use(IconsPlugin)
 
 import Contacts from './pages/listContacts';
 import People from "./pages/listPeople.vue";
+import ContactAdress from "./pages/contactAdress";
+import Guest from "./pages/listGuest";
 
 const router = new VueRouter({
   mode: 'history',
   base: __dirname,
   routes: [
     { path: '/', component: People },
-    { path: '/contacts/:id', component: Contacts,  props: true },
+    { path: '/contacts/:id', component: Contacts, props: true },
+    { path: '/contactAdress/:id', component: ContactAdress, props: true },
+    { path: '/contactAdress/guest/:id', component: Guest, props: true },
   ]
 });
 

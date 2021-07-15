@@ -15,7 +15,7 @@
             <div @click="changePage(item)">
               <b-col class="text-center">
                 <b-card-img
-                  src="https://image.flaticon.com/icons/png/512/149/149071.png"
+                  src="https://international-home.net/wp-content/uploads/2020/01/146031.png"
                   alt="Image"
                   style="max-width: 100px"
                   class="rounded-0"
@@ -87,7 +87,7 @@ export default {
   },
   methods: {
     changePage(item) {
-      this.$router.push({ path: "./contacts/:id" + item.cpf });
+      this.$router.push({ path: "./contactAdress/:id" + item.cpf });
     },
     deletePerson(cpf) {
       HTTP.delete('/person/' + cpf)
