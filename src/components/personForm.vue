@@ -20,6 +20,7 @@
         label="CPF:"
         label-for="input-3"
         class="py-2"
+        :hidden="person ? true : false"
       >
         <b-form-input
           id="input-3"

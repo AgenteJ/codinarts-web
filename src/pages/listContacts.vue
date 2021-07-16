@@ -2,8 +2,8 @@
   <b-container class="mt-5 border px-0">
     <b-navbar toggleable class="border px-4" type="light" variant="light">
       <b-navbar-brand>Lista de Contatos</b-navbar-brand>
-      <b-button v-b-modal.modal-lg variant="info text-light"
-        >Novo contato</b-button
+      <b-button v-b-modal.modal-lg variant="info text-light">
+        <BIconPlus /> Novo contato</b-button
       >
     </b-navbar>
     <b-modal id="modal-lg" size="lg" centered title="Novo cadastro" hide-footer>
@@ -11,11 +11,11 @@
     </b-modal>
 
     <div class="px-3">
-      <b-row >
+      <b-row>
         <b-col cols="3" v-for="item in items" :key="item.cpf">
           <b-card-group deck class="mt-2 mb-3 flex">
             <b-card class="max-width card mr">
-              <div @click="changePage(item)">
+              <div>
                 <b-col class="text-center">
                   <b-card-img
                     src="https://cdn.iconscout.com/icon/free/png-256/contacts-43-459935.png"
@@ -53,15 +53,41 @@
                     </b-modal>
                   </b-col>
                   <b-col cols="5">
-                    <b-button variant="danger" @click="deletePerson(item.id)"
+                    <b-button
+                      variant="danger"
+                      @click="$bvModal.show('c' + item.id)"
                       >Excluir</b-button
                     >
+                    <b-modal
+                      :id="'c' + item.id"
+                      centered
+                      title="Excluir"
+                      hide-footer
+                    >
+                      <div class="text-center">
+                        <b-alert class="text-start" show variant="danger"
+                          >CONFIRMAR EXCLUSÃO</b-alert
+                        >
+                        <hr />
+                        <b-button
+                          variant="danger"
+                          @click="deletePerson(item.id)"
+                        >
+                          CONFIRMAR
+                        </b-button>
+                      </div>
+                    </b-modal>
                   </b-col>
                 </b-row>
               </b-card-body>
             </b-card>
           </b-card-group>
         </b-col>
+        <b-row class="px-5 py-3" :hidden="items.length === 0 ? false : true">
+          <b-alert show variant="dark" class="text-center"
+            >Nenhum registro até o momento :(
+          </b-alert>
+        </b-row>
       </b-row>
     </div>
   </b-container>
@@ -71,7 +97,7 @@
 import Form from "../components/contactForm.vue";
 import HTTP from "../req/api";
 
-import { BIconFilePerson, BIconCardChecklist } from "bootstrap-vue";
+import { BIconFilePerson, BIconCardChecklist, BIconPlus } from "bootstrap-vue";
 export default {
   name: "App",
   props: ["id"],
@@ -86,6 +112,7 @@ export default {
     Form,
     BIconFilePerson,
     BIconCardChecklist,
+    BIconPlus,
   },
   methods: {
     changePage(item) {

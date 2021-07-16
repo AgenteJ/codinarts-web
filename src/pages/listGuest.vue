@@ -2,8 +2,8 @@
   <b-container class="mt-5 border px-0">
     <b-navbar toggleable class="border px-4" type="light" variant="light">
       <b-navbar-brand>Lista de inquilinos</b-navbar-brand>
-      <b-button v-b-modal.modal-lg variant="info text-light"
-        >Novo contato</b-button
+      <b-button v-b-modal.modal-lg variant="primary text-light"
+        ><BIconPlus/> Novo inquilino</b-button
       >
     </b-navbar>
     <b-modal id="modal-lg" size="lg" centered title="Novo cadastro" hide-footer>
@@ -15,10 +15,10 @@
         <b-col cols="3" v-for="item in items" :key="item.cpf">
           <b-card-group deck class="mt-2 mb-3 flex">
             <b-card class="max-width card mr">
-              <div @click="changePage(item)">
+              <div>
                 <b-col class="text-center">
                   <b-card-img
-                    src="https://www.ird.lk/wp-content/uploads/2018/11/kisspng-crowd-drawing-cartoon-community-5abe5e8dc735f1.335904791522425485816.png"
+                    :src="photo"
                     alt="Image"
                     style="max-width: 100px"
                     class="rounded-0"
@@ -56,15 +56,34 @@
                     </b-modal>
                   </b-col>
                   <b-col cols="5">
-                    <b-button variant="danger" @click="deletePerson(item.cpf)"
+                    <b-button variant="danger" @click="$bvModal.show('g' + item.cpf)"
                       >Excluir</b-button
                     >
+                     <b-modal
+                    :id="'g' + item.cpf"
+                    centered
+                    title="Excluir"
+                    hide-footer
+                  >
+                    <div class="text-center">
+                       <b-alert class="text-start" show variant="danger">CONFIRMAR EXCLUSÃO</b-alert>
+                      <hr/>
+                      <b-button  variant="danger" @click="deletePerson(item.cpf)">
+                        CONFIRMAR
+                      </b-button>
+                    </div>
+                  </b-modal>
                   </b-col>
                 </b-row>
               </b-card-body>
             </b-card>
           </b-card-group>
         </b-col>
+        <b-row class="px-5 py-3" :hidden="items.length === 0 ? false : true">
+          <b-alert show variant="dark" class="text-center"
+            >Nenhum registro até o momento :(
+          </b-alert>
+        </b-row>
       </b-row>
     </div>
   </b-container>
@@ -73,8 +92,8 @@
 <script>
 import Form from "../components/guestForm.vue";
 import HTTP from "../req/api";
-
-import { BIconFilePerson, BIconCardChecklist } from "bootstrap-vue";
+import inq from "../assets/inq.png"
+import { BIconFilePerson, BIconCardChecklist, BIconPlus } from "bootstrap-vue";
 export default {
   name: "App",
   props: ["id"],
@@ -83,12 +102,14 @@ export default {
       isHovered: false,
       fields: ["Nome", "DataNasc", "CPF"],
       items: [],
+      photo: inq,
     };
   },
   components: {
     Form,
     BIconFilePerson,
     BIconCardChecklist,
+    BIconPlus
   },
   methods: {
     changePage(item) {

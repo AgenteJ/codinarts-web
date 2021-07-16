@@ -4,7 +4,10 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueRouter from 'vue-router';
+import VueApexCharts from 'vue-apexcharts'
 
+Vue.use(VueApexCharts)
+Vue.component('apexchart', VueApexCharts)
 Vue.use(VueRouter);
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)

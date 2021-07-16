@@ -3,7 +3,7 @@
     <b-navbar toggleable class="border px-4" type="light" variant="light">
       <b-navbar-brand>Lista de Endereços</b-navbar-brand>
       <b-button v-b-modal.modal-adress variant="dark text-light"
-        >Novo Endereço</b-button
+        ><BIconPlus /> Novo Endereço</b-button
       >
     </b-navbar>
     <b-modal
@@ -23,7 +23,7 @@
             <div @click="changePage(item)">
               <b-col class="text-center">
                 <b-card-img
-                  src="https://icons.iconarchive.com/icons/johnathanmac/mavrick/512/Maps-icon.png"
+                  :src="photo"
                   alt="Image"
                   style="max-width: 100px"
                   class="rounded-0"
@@ -32,7 +32,9 @@
               <b-card-text>
                 <BIconMap />
                 {{ item.name }} {{ item.numero }} - {{ item.cep }},
-                {{ item.bairro }}, {{ item.complemento }}, {{ item.cidade }}/{{ item.estado }}
+                {{ item.bairro }}, {{ item.complemento }}, {{ item.cidade }}/{{
+                  item.estado
+                }}
               </b-card-text>
             </div>
             <b-card-body class="border-top">
@@ -44,7 +46,7 @@
                     >Editar</b-button
                   >
                   <b-modal
-                    :id="item.name+item.id"
+                    :id="item.name + item.id"
                     size="lg"
                     centered
                     title="Editar"
@@ -54,15 +56,38 @@
                   </b-modal>
                 </b-col>
                 <b-col cols="5">
-                  <b-button variant="danger" @click="deletePerson(item.id)"
+                  <b-button
+                    variant="danger"
+                    @click="$bvModal.show('a' + item.id)"
                     >Excluir</b-button
                   >
+                  <b-modal
+                    :id="'a' + item.id"
+                    centered
+                    title="Excluir"
+                    hide-footer
+                  >
+                    <div class="text-center">
+                      <b-alert class="text-start" show variant="danger"
+                        >CONFIRMAR EXCLUSÃO</b-alert
+                      >
+                      <hr />
+                      <b-button variant="danger" @click="deletePerson(item.id)">
+                        CONFIRMAR
+                      </b-button>
+                    </div>
+                  </b-modal>
                 </b-col>
               </b-row>
             </b-card-body>
           </b-card>
         </b-card-group>
       </b-col>
+      <b-row class="px-5 py-3" :hidden="items.length === 0 ? false : true">
+        <b-alert show variant="dark" class="text-center"
+          >Nenhum registro até o momento :(
+        </b-alert>
+      </b-row>
     </b-row>
   </b-container>
 </template>
@@ -70,8 +95,9 @@
 <script>
 import Form from "../components/adressForm.vue";
 import HTTP from "../req/api";
+import maps from "../assets/maps.png";
 
-import { BIconMap } from "bootstrap-vue";
+import { BIconMap, BIconPlus } from "bootstrap-vue";
 export default {
   name: "App",
   props: ["id"],
@@ -80,11 +106,13 @@ export default {
       isHovered: false,
       fields: ["Nome", "DataNasc", "CPF"],
       items: [],
+      photo: maps,
     };
   },
   components: {
     Form,
-    BIconMap
+    BIconMap,
+    BIconPlus,
   },
   methods: {
     changePage(item) {

@@ -19,6 +19,7 @@
         id="input-group-3"
         label="CPF:"
         label-for="input-3"
+        :hidden="guest ? true : false"
         class="py-2"
       >
         <b-form-input

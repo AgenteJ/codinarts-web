@@ -1,133 +1,137 @@
 <template>
   <div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group
-        id="input-group-2"
-        label="Nome do endereço:"
-        label-for="input-2"
-        class="py-2"
-      >
-        <b-form-input
-          id="input-2"
-          v-model="form.name"
-          placeholder="Digite aqui"
-          required
-        ></b-form-input>
-      </b-form-group>
+      <b-row>
+        <b-form-group
+          id="input-group-2"
+          label="Nome do endereço:"
+          label-for="input-2"
+          class="py-2 col-md-6"
+        >
+          <b-form-input
+            id="input-2"
+            v-model="form.name"
+            placeholder="Digite aqui"
+            required
+          ></b-form-input>
+        </b-form-group>
 
-      <b-form-group
-        id="input-group-3"
-        label="CEP:"
-        label-for="input-3"
-        class="py-2"
-      >
-        <b-form-input
-          id="input-3"
-          type="text"
-          v-model="form.cep"
-          placeholder="Digite o cep"
-          required
-        ></b-form-input>
-      </b-form-group>
+        <b-form-group
+          id="input-group-3"
+          label="CEP:"
+          label-for="input-3"
+          class="py-2 col-md-6"
+        >
+          <b-form-input
+            id="input-3"
+            type="text"
+            v-model="form.cep"
+            placeholder="Digite o cep"
+            required
+          ></b-form-input>
+        </b-form-group>
+      </b-row>
+      <b-row>
+        <b-form-group
+          id="input-group-3"
+          label="Logradouro:"
+          label-for="input-3"
+          class="py-2 col-md-8"
+        >
+          <b-form-input
+            id="input-3"
+            type="text"
+            v-model="form.logradouro"
+            placeholder="Digite o logradouro"
+            required
+          ></b-form-input>
+        </b-form-group>
 
-      <b-form-group
-        id="input-group-3"
-        label="Logradouro:"
-        label-for="input-3"
-        class="py-2"
-      >
-        <b-form-input
-          id="input-3"
-          type="text"
-          v-model="form.logradouro"
-          placeholder="Digite o logradouro"
-          required
-        ></b-form-input>
-      </b-form-group>
+        <b-form-group
+          id="input-group-3"
+          label="Número:"
+          label-for="input-3"
+          class="py-2 col-md-4"
+        >
+          <b-form-input
+            id="input-3"
+            type="text"
+            v-model="form.numero"
+            placeholder="Digite o numero"
+            required
+          ></b-form-input>
+        </b-form-group>
+      </b-row>
+      <b-row>
+        <b-form-group
+          id="input-group-3"
+          label="Bairro:"
+          label-for="input-3"
+          class="py-2 col-md-6"
+        >
+          <b-form-input
+            id="input-3"
+            type="text"
+            v-model="form.bairro"
+            placeholder="Digite o bairro"
+            required
+          ></b-form-input>
+        </b-form-group>
 
-      <b-form-group
-        id="input-group-3"
-        label="Número:"
-        label-for="input-3"
-        class="py-2"
-      >
-        <b-form-input
-          id="input-3"
-          type="text"
-          v-model="form.numero"
-          placeholder="Digite o numero"
-          required
-        ></b-form-input>
-      </b-form-group>
+        <b-form-group
+          id="input-group-3"
+          label="Cidade:"
+          label-for="input-3"
+          class="py-2 col-md-6"
+        >
+          <b-form-input
+            id="input-3"
+            type="text"
+            v-model="form.cidade"
+            placeholder="Digite o cidade"
+            required
+          ></b-form-input>
+        </b-form-group>
+      </b-row>
+      <b-row>
+        <b-form-group
+          id="input-group-3"
+          label="Estado:"
+          label-for="input-3"
+          class="py-2 col-md-4"
+        >
+          <b-form-input
+            id="input-3"
+            type="text"
+            v-model="form.estado"
+            placeholder="Digite o estado"
+            required
+          ></b-form-input>
+        </b-form-group>
 
-      <b-form-group
-        id="input-group-3"
-        label="Bairro:"
-        label-for="input-3"
-        class="py-2"
-      >
-        <b-form-input
-          id="input-3"
-          type="text"
-          v-model="form.bairro"
-          placeholder="Digite o bairro"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group
-        id="input-group-3"
-        label="Cidade:"
-        label-for="input-3"
-        class="py-2"
-      >
-        <b-form-input
-          id="input-3"
-          type="text"
-          v-model="form.cidade"
-          placeholder="Digite o cidade"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group
-        id="input-group-3"
-        label="Estado:"
-        label-for="input-3"
-        class="py-2"
-      >
-        <b-form-input
-          id="input-3"
-          type="text"
-          v-model="form.estado"
-          placeholder="Digite o estado"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group
-        id="input-group-3"
-        label="Complemento:"
-        label-for="input-3"
-        class="py-2"
-      >
-        <b-form-input
-          id="input-3"
-          type="text"
-          v-model="form.complemento"
-          placeholder="Digite o complemento"
-          required
-        ></b-form-input>
-      </b-form-group>
-
+        <b-form-group
+          id="input-group-3"
+          label="Complemento:"
+          label-for="input-3"
+          class="py-2 col-md-8"
+        >
+          <b-form-input
+            id="input-3"
+            type="text"
+            v-model="form.complemento"
+            placeholder="Digite o complemento"
+            required
+          ></b-form-input>
+        </b-form-group>
+      </b-row>
       <b-form-input
         id="input-3"
         type="text"
         v-model="form.personCpf"
-        
         required
+        hidden
       ></b-form-input>
-      <b-row align-h="center">
+      <b-row align-h="center" class="mt-2">
         <b-col sm="2">
           <b-button class="px-3" type="submit" variant="success"
             >Salvar</b-button
