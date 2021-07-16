@@ -25,3 +25,12 @@ $ npm install
 ```
 npm run serve
 ```
+
+
+## Ferramentas
+
+1. apexcharts
+2. axios
+3. bootstrap-vue
+4. core-js
+5. vue
