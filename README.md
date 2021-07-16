@@ -1,24 +1,27 @@
 # codinarts-web
+Bem-vindo(a) ao sistema de clientes
 
-## Project setup
+### Features
+
+- [x] Interface de usuário
+- [x] Interface de Contatos
+- [x] Interface de Endereços
+- [x] Interface de Inquilinos
+- [ ] Feedbacks
+
+<h1 align="center">
+  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./src/assets/home.jpeg" />
+</h1>
+
+## Para iniciar, siga as instruções abaixo:
+Siga todas as etapas
+
+#### Instalação
 ```
-npm install
+$ npm install
 ```
 
-### Compiles and hot-reloads for development
+### Iniciar
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
